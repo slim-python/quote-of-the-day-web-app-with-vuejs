@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Vue js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    
+    <!-- Axios CDN -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUOTE OF THE DAY</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <h1>{{ info }}</h1>
+        <div>
+            <p id="author"> - {{author}}</p>
+        </div>
+    </div>
+
+
+    <script>
+
+        new Vue({
+            el: '#app',
+            data: {
+                info: 'null',
+                author: 'null'
+            },
+            methods: {
+            },
+            mounted() {
+                axios
+                    .get('http://quotes.rest/qod.json?category=inspire')
+                    .then(response => {
+                        this.info = response.data.contents.quotes[0].quote
+                        this.author = response.data.contents.quotes[0].author
+
+                    })
+            }
+        })
+
+
+    </script>
+
+
+    <style>
+        body {
+            background-color: #111;
+        }
+
+        #app {
+
+            font-family: "Montserrat";
+            text-align: center;
+            color: #FFF;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+
+        }
+
+        h1 {
+            background-image: url(https://media.giphy.com/media/26BROrSHlmyzzHf3i/giphy.gif);
+            background-size: cover;
+            color: transparent;
+            -moz-background-clip: text;
+            -webkit-background-clip: text;
+            font-size: 50px;
+            padding: 10rem;
+            margin-top: -10px;
+            text-transform: uppercase;
+
+        }
+
+        #author{
+           margin: -18rem -60rem 0 0;
+           color: rgba(255, 255, 255, 0.137);
+        }
+
+    </style>
+
+</body>
+
+</html>
