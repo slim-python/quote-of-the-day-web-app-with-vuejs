@@ -37,7 +37,7 @@
             },
             mounted() {
                 axios
-                    .get('http://quotes.rest/qod.json?category=inspire')
+                    .get('https://quotes.rest/qod.json?category=inspire')
                     .then(response => {
                         this.info = response.data.contents.quotes[0].quote
                         this.author = response.data.contents.quotes[0].author
